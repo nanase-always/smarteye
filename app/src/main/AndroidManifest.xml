@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.smarteye.smarteye">
+    package="com.smarteye.smarteye"
+    android:versionName="0.01">
 
     <!-- Push service 运行需要的权限 -->
     <uses-permission android:name="android.permission.INTERNET" />
@@ -40,6 +41,17 @@
         </activity>
 
         <!-- push service start -->
+        <receiver android:name="com.smarteye.smarteye.PushReceiver">
+            <intent-filter>
+                <!-- 接收push消息 -->
+                <action android:name="com.baidu.android.pushservice.action.MESSAGE" />
+                <!-- 接收bind、setTags等method的返回结果-->
+                <action android:name="com.baidu.android.pushservice.action.RECEIVE" />
+                <!-- 接收通知点击事件，和通知自定义内容 -->
+                <action android:name="com.baidu.android.pushservice.action.notification.CLICK" />
+            </intent-filter>
+        </receiver>
+
         <!-- 用于接收系统消息以保证PushService正常运行 -->
         <receiver android:name="com.baidu.android.pushservice.PushServiceReceiver"
             android:process=":bdservice_v1" >
